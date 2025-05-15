@@ -9,6 +9,7 @@ export class ListPage {
     readonly boardTitle: Locator;
     readonly boardOptionsButton: Locator;
     readonly deleteBoardButton: Locator;
+    readonly addCardButton: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -19,6 +20,7 @@ export class ListPage {
         this.boardTitle = page.getByTestId("board-title")
         this.boardOptionsButton = page.getByTestId("board-options");
         this.deleteBoardButton = page.getByTestId("delete-board");
+        this.addCardButton = page.getByTestId("new-card");
     }
 
     // Assertions
