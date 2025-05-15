@@ -14,8 +14,8 @@ export class GetStartedPage {
     }
 
     // Assertions
-    async assertFirstBoardCreated(boardName: string) {
+    async assertFirstBoardCreated(listName: string) {
         await expect(this.firstBoardInput).toBeVisible();
-        await expect(this.firstBoardInput).toHaveValue(boardName);
+        await expect(this.firstBoardInput).toHaveValue(listName);
     }
 }
