@@ -1,31 +1,30 @@
 import {expect, Locator, Page} from "@playwright/test";
+import {BasePage} from "./base.page";
 
-export class HomePage {
-    private readonly page: Page;
-    //readonly boardItem: Locator;
+export class HomePage extends BasePage {
     readonly createBoardItem: Locator
     readonly newBoardInput: Locator;
     readonly createBoardButton: Locator;
     readonly lastBoardItem: Locator;
+    readonly lastBoardItemName: Promise<string>;
+
 
     constructor(page: Page) {
-        this.page = page;
+        super(page);
         this.createBoardItem = page.getByTestId("create-board");
         this.newBoardInput = page.getByTestId("new-board-input");
         this.createBoardButton = page.getByTestId("new-board-create");
         this.lastBoardItem = page.getByTestId("board-item").last();
+        this.lastBoardItemName = page.locator('(//div[@data-cy="board-item"]//h2)[last()]').textContent();
+
     }
 
-    getBoardItem(boardName: string): Locator {
-        return this.page.locator(`//div[@data-cy="board-item" and .//h2[text()="${boardName}"]]`);
-    }
-
-    async goToPage() {
-        await this.page.goto("")
+    async clickOnBoardItemByName(boardName: string): Promise<void> {
+        await this.page.locator(`//div[@data-cy="board-item" and .//h2[text()="${boardName}"]]`).click();
     }
 
     // Assertions
     async boardIsDeleted(boardName: string) {
-        await expect(this.getBoardItem(boardName)).not.toBeVisible();
+        expect(await this.clickOnBoardItemByName(boardName)).toThrowError();
     }
 }
