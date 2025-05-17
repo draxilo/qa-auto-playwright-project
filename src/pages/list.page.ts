@@ -43,5 +43,8 @@ export class ListPage extends BasePage {
         //await expect(this.boardTitle).toHaveText(boardTitle); // This is not working
     }
 
-    async assertCardTitle(boardTitle: string) {}
+    async assertCardCreated(boardTitle: string) {
+        await expect(this.cardItem).toBeVisible();
+        await expect(this.cardItemText).toHaveText(boardTitle);
+    }
 }

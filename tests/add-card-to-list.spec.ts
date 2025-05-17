@@ -10,4 +10,7 @@ test("add card to list", async ({homePage, listPage }) => {
     await listPage.addAnotherCardButton.click();
     await listPage.newCardInput.fill(cardInput);
     await listPage.addCardButton.click()
+
+    //Assertions
+    await listPage.assertCardCreated(cardInput);
 })
