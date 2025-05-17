@@ -1,21 +1,14 @@
-import {HomePage} from "../src/pages/home.page";
-import {ListPage} from "../src/pages/list.page";
-import {test} from "@playwright/test";
+import {test} from "../src/fixtures/base.fixture";
 
-test("delete board", async ({ page }) => {
+test("delete board", async ({ homePage, listPage }) => {
     // Test Data
 
-    const homePage = new HomePage(page);
-    const listPage = new ListPage(page);
-
-    await homePage.goToPage();
-
-    const lastBoardItemName = await page.locator('(//div[@data-cy="board-item"]//h2)[last()]').textContent();
+    await homePage.goToPage("");
 
     await homePage.lastBoardItem.click();
     await listPage.boardOptionsButton.click();
     await listPage.deleteBoardButton.click();
 
     // Assertions
-    await homePage.boardIsDeleted(lastBoardItemName);
+    await homePage.boardIsDeleted(await homePage.lastBoardItemName);
 })
