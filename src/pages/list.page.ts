@@ -1,7 +1,7 @@
 import {expect, Locator, Page} from "@playwright/test";
+import {BasePage} from "./base.page";
 
-export class ListPage {
-    private readonly page: Page;
+export class ListPage extends BasePage {
     readonly createListButton: Locator;
     readonly addListNameInput: Locator;
     readonly addListButton: Locator;
@@ -9,18 +9,27 @@ export class ListPage {
     readonly boardTitle: Locator;
     readonly boardOptionsButton: Locator;
     readonly deleteBoardButton: Locator;
+    readonly addAnotherCardButton: Locator;
+    readonly cardItem: Locator;
+    readonly cardItemText: Locator;
+    readonly newCardInput: Locator
     readonly addCardButton: Locator;
 
+
     constructor(page: Page) {
-        this.page = page;
+        super(page)
         this.createListButton = page.getByTestId("create-list");
         this.addListNameInput = page.getByTestId("add-list-input");
-        this.addListButton = page.getByRole('button', { name: 'Add list' });
+        this.addListButton = page.getByRole('button', {name: 'Add list'});
         this.listName = page.getByTestId("list-name").last();
         this.boardTitle = page.getByTestId("board-title")
         this.boardOptionsButton = page.getByTestId("board-options");
         this.deleteBoardButton = page.getByTestId("delete-board");
-        this.addCardButton = page.getByTestId("new-card");
+        this.addAnotherCardButton = page.getByTestId("new-card");
+        this.cardItem = page.getByTestId("card");
+        this.cardItemText = page.getByTestId("card-text");
+        this.newCardInput = page.getByTestId("new-card-input");
+        this.addCardButton = page.locator(`//button[text()="Add card"]`);
     }
 
     // Assertions
@@ -33,4 +42,6 @@ export class ListPage {
         await expect(this.boardTitle).toBeVisible();
         //await expect(this.boardTitle).toHaveText(boardTitle); // This is not working
     }
+
+    async assertCardTitle(boardTitle: string) {}
 }
