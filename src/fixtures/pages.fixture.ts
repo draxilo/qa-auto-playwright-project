@@ -4,23 +4,20 @@ import {GetStartedPage} from "../pages/get-started.page";
 import {HomePage} from "../pages/home.page";
 import {ListPage} from "../pages/list.page";
 
-interface fixtures {
+interface PageFixture {
     getStartedPage : GetStartedPage;
     homePage : HomePage;
     listPage: ListPage;
 }
 
-export const test = basic.extend<fixtures>({
+export const test = basic.extend<PageFixture>({
     getStartedPage: async ({ page }, use) => {
-        const getStartedPage = new GetStartedPage(page);
-        await use(getStartedPage);
+        await use(new GetStartedPage(page));
     },
     homePage: async ({ page }, use) => {
-        const homePage = new HomePage(page);
-        await use(homePage);
+        await use(new HomePage(page));
     },
     listPage: async ({ page }, use) => {
-        const listPage = new ListPage(page);
-        await use(listPage);
+        await use(new ListPage(page));
     }
 })
