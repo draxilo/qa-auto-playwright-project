@@ -12,7 +12,7 @@ export class ListPage extends BasePage {
     readonly addAnotherCardButton: Locator;
     readonly cardItem: Locator;
     readonly cardItemText: Locator;
-    readonly newCardInput: Locator
+    readonly cardTitleInput: Locator
     readonly addCardButton: Locator;
 
 
@@ -28,7 +28,7 @@ export class ListPage extends BasePage {
         this.addAnotherCardButton = page.getByTestId("new-card");
         this.cardItem = page.getByTestId("card");
         this.cardItemText = page.getByTestId("card-text");
-        this.newCardInput = page.getByTestId("new-card-input");
+        this.cardTitleInput = page.getByTestId("new-card-input");
         this.addCardButton = page.locator(`//button[text()="Add card"]`);
     }
 
@@ -43,8 +43,13 @@ export class ListPage extends BasePage {
         //await expect(this.boardTitle).toHaveText(boardTitle); // This is not working
     }
 
-    async assertCardCreated(boardTitle: string) {
+    async assertCardCreated(cardTitleInput: string) {
         await expect(this.cardItem).toBeVisible();
-        await expect(this.cardItemText).toHaveText(boardTitle);
+        await expect(this.cardItemText).toHaveText(cardTitleInput);
+    }
+
+    async assertFirstBoardCreated(boardTitle: string) {
+        await expect(this.boardTitle).toBeVisible();
+        await expect(this.boardTitle).toHaveValue(boardTitle);
     }
 }
