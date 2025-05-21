@@ -6,7 +6,8 @@ export class HomePage extends BasePage {
     readonly newBoardInput: Locator;
     readonly createBoardButton: Locator;
     readonly lastBoardItem: Locator;
-    readonly lastBoardItemName: Promise<string>;
+    readonly lastBoardItemName: Locator;
+    readonly boardTitle: Locator;
 
 
     constructor(page: Page) {
@@ -15,7 +16,8 @@ export class HomePage extends BasePage {
         this.newBoardInput = page.getByTestId("new-board-input");
         this.createBoardButton = page.getByTestId("new-board-create");
         this.lastBoardItem = page.getByTestId("board-item").last();
-        this.lastBoardItemName = page.locator('(//div[@data-cy="board-item"]//h2)[last()]').textContent();
+        this.lastBoardItemName = page.locator('(//div[@data-cy="board-item"]//h2)[last()]');
+        this.boardTitle = page.locator("//div[@data-cy=\"board-item\" and .//h2]");
 
     }
 
@@ -25,6 +27,7 @@ export class HomePage extends BasePage {
 
     // Assertions
     async boardIsDeleted(boardName: string) {
-        expect(await this.clickOnBoardItemByName(boardName)).toThrowError();
+        expect(this.page.locator(`//div[@data-cy="board-item" and .//h2[text()="${boardName}"]]`)).not.toBeVisible();
+        await expect(this.boardTitle).not.toHaveText([boardName]);
     }
 }
