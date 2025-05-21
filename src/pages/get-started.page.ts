@@ -10,8 +10,4 @@ export class GetStartedPage extends BasePage {
     }
 
     // Assertions
-    async assertFirstBoardCreated(listName: string) {
-        await expect(this.firstBoardInput).toBeVisible();
-        await expect(this.firstBoardInput).toHaveValue(listName);
-    }
 }
