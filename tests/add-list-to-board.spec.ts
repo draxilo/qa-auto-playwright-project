@@ -1,9 +1,11 @@
 import {expect} from "@playwright/test";
-import {test} from "../src/fixtures/base.fixture";
+import {test} from "../src/fixtures/pages.fixture";
 
 const boardName = "Test Board";
 const listName = "Test List";
+let boardId: number; // Declare a variable to store the board ID
 
+// Set up
 test.beforeEach(async ({request}) => {
     const response = await request.post("http://localhost:3000/api/boards", {
         data: {
@@ -12,13 +14,17 @@ test.beforeEach(async ({request}) => {
     })
 
     expect(response.status()).toBe(201);
+    const responseBody = await response.json();
+    boardId = responseBody.id; // Store the board ID
 })
 
 test('add list to board', async ({ homePage, listPage }) => {
     // Test Data
 
-    await homePage.goToPage("")
-    await homePage.lastBoardItem.click();
+    await homePage.goToPage(`http://localhost:3000/board/${boardId}`)
+
+    //Dirty fix for the test to work
+    await listPage.clickInTheMiddle();
 
     await listPage.createListButton.click();
 
@@ -27,3 +33,9 @@ test('add list to board', async ({ homePage, listPage }) => {
 
     await listPage.assertListCreated(listName);
 })
+
+// Tear down
+test.afterEach(async ({request}) => {
+    const response = await request.delete(`http://localhost:3000/api/boards/${boardId}`);
+    expect(response.status()).toBe(200);
+});
