@@ -1,8 +1,8 @@
 import {expect} from "@playwright/test";
 import {test} from "../src/fixtures/pages.fixture";
+import {faker} from "@faker-js/faker";
 
-const boardName = "Test Board";
-const listName = "Test List";
+const boardName =  faker.lorem.words(3);
 let boardId: number; // Declare a variable to store the board ID
 
 // Set up
@@ -20,6 +20,7 @@ test.beforeEach(async ({request}) => {
 
 test('add list to board', async ({ homePage, listPage }) => {
     // Test Data
+    const listName =  faker.lorem.words(3);
 
     await homePage.goToPage(`http://localhost:3000/board/${boardId}`)
 

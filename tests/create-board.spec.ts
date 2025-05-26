@@ -1,11 +1,12 @@
 import {test} from "../src/fixtures/pages.fixture";
 import {expect} from "@playwright/test";
+import {faker} from "@faker-js/faker";
 
 // Set up
 test.beforeEach(async ({request}) => {
     const response = await request.post("http://localhost:3000/api/boards", {
         data: {
-            "name": "SET UP BOARD",
+            "name":  faker.lorem.words(3),
         },
     })
 
@@ -14,7 +15,7 @@ test.beforeEach(async ({request}) => {
 
 test("create board", async ({ homePage }) => {
     // Test Data
-    const boardName = "Test Board";
+    const boardName =  faker.lorem.words(3);
 
     await homePage.goToPage("");
 

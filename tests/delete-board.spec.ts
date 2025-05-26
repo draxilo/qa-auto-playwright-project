@@ -1,8 +1,9 @@
 import {test} from "../src/fixtures/pages.fixture";
 import {expect} from "@playwright/test";
+import { faker } from '@faker-js/faker';
 
-const boardName = "Test Board";
-let boardId: number;
+const boardName =  faker.lorem.words(3);
+let boardId: number; // Declare a variable to store the board ID
 
 // Set up
 test.beforeEach(async ({request}) => {

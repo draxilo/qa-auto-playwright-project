@@ -1,9 +1,9 @@
 import {test} from "../src/fixtures/pages.fixture";
 import {expect} from "@playwright/test";
+import {faker} from "@faker-js/faker";
 
-const boardName = "Test Board";
-const cardTitleInput = "Text Card"
-const listName = "Test List"; // Name of the list to which the card will be added
+const boardName = faker.lorem.words(3); // Generate a random board name
+const listName = faker.lorem.words(3); // Name of the list to which the card will be added
 let boardId: number; // Declare a variable to store the board ID
 
 // Set up
@@ -30,6 +30,8 @@ test.beforeEach(async ({request}) => {
 
 test("add card to list", async ({homePage, listPage }) => {
     // Test Data
+    const cardTitleInput = faker.lorem.words(3); // Generate a random card title
+
 
     await homePage.goToPage(`http://localhost:3000/board/${boardId}`)
 

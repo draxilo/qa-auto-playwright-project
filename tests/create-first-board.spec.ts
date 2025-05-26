@@ -1,5 +1,6 @@
 import {test} from "../src/fixtures/pages.fixture";
 import {expect} from "@playwright/test";
+import {faker} from "@faker-js/faker";
 
 // Set up
 test.beforeEach(async ({request}) => {
@@ -10,7 +11,7 @@ test.beforeEach(async ({request}) => {
 
 test('create first board', async ({ page, getStartedPage, listPage }) => {
     // Test Data
-    const boardName = "Test Board";
+    const boardName =  faker.lorem.words(3);
 
     await getStartedPage.goToPage("")
     await getStartedPage.firstBoardInput.fill(boardName);
