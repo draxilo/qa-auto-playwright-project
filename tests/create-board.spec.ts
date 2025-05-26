@@ -2,6 +2,8 @@ import {test} from "../src/fixtures/pages.fixture";
 import {expect} from "@playwright/test";
 import {faker} from "@faker-js/faker";
 
+let firstBoardId: number; // Declare a variable to store the board ID
+
 // Set up
 test.beforeEach(async ({request}) => {
     const response = await request.post("http://localhost:3000/api/boards", {
@@ -11,9 +13,11 @@ test.beforeEach(async ({request}) => {
     })
 
     expect(response.status()).toBe(201);
+    const responseBody = await response.json();
+    firstBoardId = responseBody.id; // Store the board ID
 })
 
-test("create board", async ({ homePage }) => {
+test("create board", async ({ homePage, listPage }) => {
     // Test Data
     const boardName =  faker.lorem.words(3);
 
@@ -24,6 +28,7 @@ test("create board", async ({ homePage }) => {
     await homePage.createBoardButton.click();
 
     // Assertions
+    await listPage.assertBoardCreated(boardName);
 })
 
 // Tear down

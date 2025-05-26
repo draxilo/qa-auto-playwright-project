@@ -17,7 +17,7 @@ test('create first board', async ({ page, getStartedPage, listPage }) => {
     await getStartedPage.firstBoardInput.fill(boardName);
     await page.keyboard.press("Enter");
 
-    await listPage.assertFirstBoardCreated(boardName);
+    await listPage.assertBoardCreated(boardName);
 });
 
 // Tear down
