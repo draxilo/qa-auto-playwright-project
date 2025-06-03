@@ -19,4 +19,22 @@ export class BasePage {
             await this.page.mouse.click(centerX, centerY);
         }
     }
+
+    async waitForUrlAndGetLastPathSegment(urlPattern: RegExp = /.*/): Promise<string> {
+        // Wait for URL to match the given pattern (default: any URL)
+        await this.page.waitForURL(urlPattern);
+
+        const urlObj = new URL(this.page.url());
+        const segments = urlObj.pathname.split('/').filter(Boolean); // removes empty strings
+
+        if (segments.length === 0) {
+            throw new Error(`URL path has no segments: ${this.page.url()}`);
+        }
+
+        // Return the last segment, assuming it's the ID
+        return segments[segments.length - 1];
+    }
+
+
+
 }
