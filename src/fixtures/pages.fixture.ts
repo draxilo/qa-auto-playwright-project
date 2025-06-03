@@ -1,4 +1,4 @@
-import { test as basic } from "@playwright/test";
+import { test as base } from "@playwright/test";
 
 import {GetStartedPage} from "../pages/get-started.page";
 import {HomePage} from "../pages/home.page";
@@ -10,7 +10,7 @@ interface PageFixture {
     listPage: ListPage;
 }
 
-export const test = basic.extend<PageFixture>({
+export const test = base.extend<PageFixture>({
     getStartedPage: async ({ page }, use) => {
         await use(new GetStartedPage(page));
     },
