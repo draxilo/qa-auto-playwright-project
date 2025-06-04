@@ -32,7 +32,6 @@ test('add list to board', async ({ homePage, listPage }) => {
 })
 
 // Tear down
-test.afterEach(async ({request}) => {
-    const response = await request.delete(`http://localhost:3000/api/boards/${board.id}`);
-    expect(response.status()).toBe(200);
+test.afterEach(async ({apiDeleteBoard}) => {
+    await apiDeleteBoard(board)
 });
