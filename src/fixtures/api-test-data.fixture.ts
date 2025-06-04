@@ -7,6 +7,7 @@ import {List} from "../interfaces/list.interface";
 interface ApiTestDataFixture {
     apiCreateBoard(board: Board): Promise<APIResponse>;
     apiDeleteBoard(board: Board): Promise<APIResponse>;
+    apiDeleteListOfBoards(boardIds: number[]): Promise<Array<APIResponse>>;
     apiCreateList(board: Board): Promise<Array<APIResponse>>;
 }
 
@@ -46,5 +47,16 @@ export const test = base.extend<ApiTestDataFixture>({
             }
             return responses;
         })
+    },
+    apiDeleteListOfBoards: async ({ baseURL, request }, use) => {
+        await use(async (boardIds: number[]) => {
+            const responses: Array<APIResponse> = [];
+            for (const id of boardIds) {
+                const response = await request.delete(`${baseURL}/api/boards/${id}`);
+                expect(response.status()).toBe(200);
+                responses.push(response);
+            }
+            return responses;
+        });
     }
 })
