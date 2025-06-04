@@ -23,6 +23,8 @@ export class BasePage {
     async waitForUrlAndGetLastPathSegment(urlPattern: RegExp = /.*/): Promise<string> {
         // Wait for URL to match the given pattern (default: any URL)
         await this.page.waitForURL(urlPattern);
+        await this.page.waitForTimeout(100); // Adjust the timeout as needed
+
 
         const urlObj = new URL(this.page.url());
         const segments = urlObj.pathname.split('/').filter(Boolean); // removes empty strings
