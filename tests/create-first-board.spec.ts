@@ -1,12 +1,10 @@
-import {test} from "../src/fixtures/pages.fixture";
+import {test} from "../src/fixtures/base.fixture";
 import {expect} from "@playwright/test";
 import {faker} from "@faker-js/faker";
 
 // Set up
-test.beforeEach(async ({request}) => {
-    const response = await request.delete("http://localhost:3000/api/boards")
-
-    expect(response.status()).toBe(204);
+test.beforeEach(async ({apiDeleteAllBoards}) => {
+    await apiDeleteAllBoards();
 })
 
 test('create first board', async ({ page, getStartedPage, listPage }) => {
@@ -21,8 +19,6 @@ test('create first board', async ({ page, getStartedPage, listPage }) => {
 });
 
 // Tear down
-test.afterEach(async ({request}) => {
-    const response = await request.delete("http://localhost:3000/api/boards")
-
-    expect(response.status()).toBe(204);
+test.afterEach(async ({apiDeleteAllBoards}) => {
+    await apiDeleteAllBoards()
 })

@@ -8,6 +8,7 @@ interface ApiTestDataFixture {
     apiCreateBoard(board: Board): Promise<APIResponse>;
     apiDeleteBoard(board: Board): Promise<APIResponse>;
     apiDeleteListOfBoards(boardIds: number[]): Promise<Array<APIResponse>>;
+    apiDeleteAllBoards():  Promise<APIResponse>;
     apiCreateList(board: Board): Promise<Array<APIResponse>>;
 }
 
@@ -57,6 +58,13 @@ export const test = base.extend<ApiTestDataFixture>({
                 responses.push(response);
             }
             return responses;
+        });
+    },
+    apiDeleteAllBoards: async ({ baseURL, request }, use) => {
+        await use(async () => {
+            const response = await request.delete(`${baseURL}/api/boards`);
+            expect(response.status()).toBe(204);
+            return response;
         });
     }
 })
