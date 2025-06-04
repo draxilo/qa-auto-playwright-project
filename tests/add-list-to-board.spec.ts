@@ -1,4 +1,3 @@
-import {expect} from "@playwright/test";
 import {test} from "../src/fixtures/base.fixture";
 import {faker} from "@faker-js/faker";
 import {Board} from "../src/interfaces/board.interface";
@@ -8,10 +7,12 @@ const board: Board = {
 }
 
 // Set up
-test.beforeEach(async ({ apiCreateBoard }) => {
-    const response = await apiCreateBoard(board);
-    const responseBody = await response.json();
-    board.id = responseBody.id; // Store the board ID
+test.beforeEach(async ({apiCreateList, apiCreateBoard}) => {
+    const createBoardResponse = await apiCreateBoard(board)
+    const createBoardResponseBody = await createBoardResponse.json();
+    board.id = createBoardResponseBody.id; // Store the board ID
+
+    await apiCreateList(board);
 })
 
 test('add list to board', async ({ homePage, listPage }) => {
