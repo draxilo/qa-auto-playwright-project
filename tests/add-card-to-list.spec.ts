@@ -1,34 +1,30 @@
-import {test} from "../src/fixtures/pages.fixture";
+import {test} from "../src/fixtures/base.fixture";
 import {expect} from "@playwright/test";
 import {faker} from "@faker-js/faker";
 import {Board} from "../src/interfaces/board.interface";
+import {isMapIterator} from "node:util/types";
 
 const board: Board = {
-    name: faker.lorem.words(3)
+    name: faker.lorem.words(3),
+    lists: [
+        {
+            name: faker.lorem.words(3),
+            cards: []
+        },
+        {
+            name: faker.lorem.words(3),
+            cards: []
+        }
+    ]
 }
 
-const listName = faker.lorem.words(3); // Name of the list to which the card will be added
-
 // Set up
-test.beforeEach(async ({request}) => {
-    const response = await request.post("http://localhost:3000/api/boards", {
-        data: {
-            "name": board.name,
-        },
-    })
+test.beforeEach(async ({apiCreateList, apiCreateBoard}) => {
+    const createBoardResponse = await apiCreateBoard(board)
+    const createBoardResponseBody = await createBoardResponse.json();
+    board.id = createBoardResponseBody.id; // Store the board ID
 
-    expect(response.status()).toBe(201);
-    const responseBody = await response.json();
-    board.id = responseBody.id; // Store the board ID
-
-    const responseList = await request.post(`http://localhost:3000/api/lists`, {
-        data: {
-            "name": listName,
-            "boardId": board.id,
-        },
-    })
-
-    expect(responseList.status()).toBe(201);
+    await apiCreateList(board);
 })
 
 test("add card to list", async ({homePage, listPage }) => {
@@ -40,7 +36,7 @@ test("add card to list", async ({homePage, listPage }) => {
     })
 
     await test.step('Add a card to the list', async () => {
-        await listPage.addAnotherCardButton.click();
+        await listPage.addAnotherCardButton.last().click();
         await listPage.cardTitleInput.fill(cardTitleInput);
         await listPage.addCardButton.click()
     })
@@ -51,7 +47,6 @@ test("add card to list", async ({homePage, listPage }) => {
 })
 
 // Tear down
-test.afterEach(async ({request}) => {
-    const response = await request.delete(`http://localhost:3000/api/boards/${board.id}`);
-    expect(response.status()).toBe(200);
+test.afterEach(async ({apiDeleteBoard}) => {
+    await apiDeleteBoard(board)
 });
