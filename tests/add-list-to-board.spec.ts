@@ -19,17 +19,22 @@ test('add list to board', async ({ homePage, listPage }) => {
     // Test Data
     const listName =  faker.lorem.words(3);
 
-    await homePage.goToPage(`http://localhost:3000/board/${board.id}`)
+    await test.step('Navigate to board page', async () => {
+        await homePage.goToPage(`http://localhost:3000/board/${board.id}`)
+    })
 
-    //Dirty fix for the test to work
-    await listPage.clickInTheMiddle();
+    await test.step('Add a new list', async () => {
+        await listPage.clickInTheMiddle();
 
-    await listPage.createListButton.click();
+        await listPage.createListButton.click();
 
-    await listPage.addListNameInput.fill(listName);
-    await listPage.addListButton.click();
+        await listPage.addListNameInput.fill(listName);
+        await listPage.addListButton.click();
+    })
 
-    await listPage.assertListCreated(listName);
+    await test.step('Assert that a new list is created', async () => {
+        await listPage.assertListCreated(listName);
+    })
 })
 
 // Tear down
