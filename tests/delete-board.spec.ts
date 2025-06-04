@@ -16,12 +16,18 @@ test.beforeEach(async ({apiCreateList, apiCreateBoard}) => {
 test("delete board", async ({ page, homePage, listPage }) => {
     // Test Data
 
-    await homePage.goToPage(`http://localhost:3000/board/${board.id}`)
+    await test.step('Navigate to the home page', async () => {
+        await homePage.goToPage(`http://localhost:3000/board/${board.id}`)
+    })
 
-    await listPage.boardOptionsButton.click();
-    await listPage.deleteBoardButton.click();
+    await test.step('Delete the board', async () => {
+        await listPage.boardOptionsButton.click();
+        await listPage.deleteBoardButton.click();
 
-    await page.reload()
-    // Assertions
-    await homePage.boardIsDeleted(board.name);
+        await page.reload() // Reload the page to ensure the board is deleted
+    })
+
+    await test.step("Assert Board is deleted", async () => {
+        await homePage.boardIsDeleted(board.name);
+    })
 })
