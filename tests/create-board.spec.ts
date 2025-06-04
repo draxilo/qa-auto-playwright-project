@@ -4,7 +4,6 @@ import {test} from "../src/fixtures/base.fixture";
 import {Board} from "../src/interfaces/board.interface";
 
 
-let url: string
 let createdBoardId: string
 const board: Board = {
     name: faker.lorem.words(3)
@@ -21,16 +20,20 @@ test("create board", async ({ homePage, listPage, page }) => {
     // Test Data
     const boardName =  faker.lorem.words(3);
 
-    await homePage.goToPage("");
+    await test.step('Navigate to the home page', async () => {
+        await homePage.goToPage("");
+    })
 
-    await homePage.createBoardItem.click();
-    await homePage.newBoardInput.fill(boardName);
-    await homePage.createBoardButton.click();
+    await test.step('Create a board and get its ID', async () => {
+        await homePage.createBoardItem.click();
+        await homePage.newBoardInput.fill(boardName);
+        await homePage.createBoardButton.click();
+        createdBoardId = await homePage.waitForUrlAndGetLastPathSegment()
+    })
 
-    createdBoardId = await homePage.waitForUrlAndGetLastPathSegment()
-
-    // Assertions
-    await listPage.assertBoardCreated(boardName);
+    await test.step('Assert Board created', async () => {
+        await listPage.assertBoardCreated(boardName);
+    })
 })
 
 // Tear down
