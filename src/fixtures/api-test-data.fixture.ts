@@ -50,7 +50,7 @@ export const test = base.extend<ApiTestDataFixture>({
         })
     },
     apiDeleteListOfBoards: async ({ baseURL, request }, use) => {
-        await use(async (boardIds: number[]) => {
+        await use(async (boardIds: number[] | Board[]) => {
             const responses: Array<APIResponse> = [];
             for (const id of boardIds) {
                 const response = await request.delete(`${baseURL}/api/boards/${id}`);
