@@ -1,6 +1,14 @@
 import {test} from "../src/fixtures/base.fixture";
-import {expect} from "@playwright/test";
 import {faker} from "@faker-js/faker";
+import {AllureParams} from "../src/utils/allure.util";
+
+/* Allure Paramaters */
+const allure: AllureParams = {
+    description: "This test creates the first board.",
+    parentSuite: "Board",
+    suite: "Create",
+    tag: "create-first-board"
+}
 
 // Set up
 test.beforeEach(async ({apiDeleteAllBoards}) => {

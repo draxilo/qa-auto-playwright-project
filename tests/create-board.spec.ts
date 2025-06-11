@@ -2,7 +2,15 @@ import {expect} from "@playwright/test";
 import {faker} from "@faker-js/faker";
 import {test} from "../src/fixtures/base.fixture";
 import {Board} from "../src/interfaces/board.interface";
+import {AllureParams} from "../src/utils/allure.util";
 
+/* Allure Paramaters */
+const allure: AllureParams = {
+    description: "This test creates a board.",
+    parentSuite: "Board",
+    suite: "Create",
+    tag: "create-board"
+}
 
 let createdBoardId: string
 const board: Board = {
@@ -27,8 +35,8 @@ test("create board", async ({ homePage, listPage, page }) => {
     await test.step('Create a board and get its ID', async () => {
         await homePage.createBoardItem.click();
         await homePage.newBoardInput.fill(boardName);
-        await homePage.createBoardButton.click();
-        createdBoardId = await homePage.waitForUrlAndGetLastPathSegment()
+        //await homePage.createBoardButton.click();
+        createdBoardId = await homePage.waitForUrlAndGetLastPathSegment(/\/board\//)
     })
 
     await test.step('Assert Board created', async () => {

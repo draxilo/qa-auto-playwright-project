@@ -1,7 +1,16 @@
 import {test} from "../src/fixtures/base.fixture";
 import {faker} from "@faker-js/faker";
 import {Board} from "../src/interfaces/board.interface";
-import {isMapIterator} from "node:util/types";
+import {AllureParams} from "../src/utils/allure.util";
+
+/* Allure Paramaters */
+const allure: AllureParams = {
+    description: "This test adds a card to a list on a board.",
+    parentSuite: "Board",
+    suite: "List",
+    subSuite: "Card",
+    tag: "add-card-to-list"
+}
 
 const board: Board = {
     name: faker.lorem.words(3),
