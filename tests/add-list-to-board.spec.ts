@@ -11,8 +11,6 @@ test.beforeEach(async ({apiCreateList, apiCreateBoard}) => {
     const createBoardResponse = await apiCreateBoard(board)
     const createBoardResponseBody = await createBoardResponse.json();
     board.id = createBoardResponseBody.id; // Store the board ID
-
-    await apiCreateList(board);
 })
 
 test('add list to board', async ({ homePage, listPage }) => {
@@ -24,9 +22,9 @@ test('add list to board', async ({ homePage, listPage }) => {
     })
 
     await test.step('Add a new list', async () => {
-        await listPage.clickInTheMiddle();
+        //await listPage.clickInTheMiddle();
 
-        await listPage.createListButton.click();
+        //await listPage.createListButton.click();
 
         await listPage.addListNameInput.fill(listName);
         await listPage.addListButton.click();

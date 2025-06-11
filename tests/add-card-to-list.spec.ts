@@ -1,5 +1,4 @@
 import {test} from "../src/fixtures/base.fixture";
-import {expect} from "@playwright/test";
 import {faker} from "@faker-js/faker";
 import {Board} from "../src/interfaces/board.interface";
 import {isMapIterator} from "node:util/types";
@@ -7,10 +6,6 @@ import {isMapIterator} from "node:util/types";
 const board: Board = {
     name: faker.lorem.words(3),
     lists: [
-        {
-            name: faker.lorem.words(3),
-            cards: []
-        },
         {
             name: faker.lorem.words(3),
             cards: []
