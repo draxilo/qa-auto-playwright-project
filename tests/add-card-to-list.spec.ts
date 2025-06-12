@@ -3,7 +3,7 @@ import {faker} from "@faker-js/faker";
 import {Board} from "../src/interfaces/board.interface";
 import {AllureParams} from "../src/utils/allure.util";
 
-/* Allure Paramaters */
+/* Allure Parameters */
 const allure: AllureParams = {
     description: "This test adds a card to a list on a board.",
     parentSuite: "Board",

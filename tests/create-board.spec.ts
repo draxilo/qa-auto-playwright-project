@@ -4,7 +4,7 @@ import {test} from "../src/fixtures/base.fixture";
 import {Board} from "../src/interfaces/board.interface";
 import {AllureParams} from "../src/utils/allure.util";
 
-/* Allure Paramaters */
+/* Allure Parameters */
 const allure: AllureParams = {
     description: "This test creates a board.",
     parentSuite: "Board",
