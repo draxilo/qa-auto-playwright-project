@@ -7,9 +7,9 @@ import {AllureParams} from "../src/utils/allure.util";
 /* Allure Parameters */
 const allure: AllureParams = {
     description: "This test creates a board.",
-    parentSuite: "Board",
-    suite: "Create",
-    tag: "create-board"
+    parentSuite: "Board Management",
+    suite: "Board CRUD",
+    tags: ["@ui", "@board", "@smoke"],
 }
 
 let createdBoardId: string
@@ -18,13 +18,13 @@ const board: Board = {
 }
 
 // Set up
-test.beforeEach(async ({apiCreateList, apiCreateBoard}) => {
+test.beforeEach(async ({ apiCreateBoard}) => {
     const createBoardResponse = await apiCreateBoard(board)
     const createBoardResponseBody = await createBoardResponse.json();
     board.id = createBoardResponseBody.id; // Store the board ID
 })
 
-test("create board", async ({ homePage, listPage, page }) => {
+test("create board", {tag: [...allure.tags]} , async ({ homePage, listPage }) => {
     // Test Data
     const boardName =  faker.lorem.words(3);
 
@@ -35,7 +35,7 @@ test("create board", async ({ homePage, listPage, page }) => {
     await test.step('Create a board and get its ID', async () => {
         await homePage.createBoardItem.click();
         await homePage.newBoardInput.fill(boardName);
-        //await homePage.createBoardButton.click();
+        await homePage.createBoardButton.click();
         createdBoardId = await homePage.waitForUrlAndGetLastPathSegment(/\/board\//)
     })
 

@@ -6,10 +6,10 @@ import {AllureParams} from "../src/utils/allure.util";
 /* Allure Parameters */
 const allure: AllureParams = {
     description: "This test adds a card to a list on a board.",
-    parentSuite: "Board",
-    suite: "List",
-    subSuite: "Card",
-    tag: "add-card-to-list"
+    parentSuite: "Card Management",
+    suite: "Card CRUD",
+    subSuite: "Add Card",
+    tags: ["@ui", "@card", "@smoke"],
 }
 
 const board: Board = {
@@ -31,7 +31,7 @@ test.beforeEach(async ({apiCreateList, apiCreateBoard}) => {
     await apiCreateList(board);
 })
 
-test("add card to list", async ({homePage, listPage }) => {
+test("add card to list", {tag: [...allure.tags]} ,  async ({ homePage, listPage }) => {
     // Test Data
     const cardTitleInput = faker.lorem.words(3); // Generate a random card title
 
