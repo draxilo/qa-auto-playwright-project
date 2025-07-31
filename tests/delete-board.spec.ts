@@ -1,15 +1,13 @@
 import {test} from "../src/fixtures/base.fixture";
 import { faker } from '@faker-js/faker';
 import {Board} from "../src/interfaces/board.interface";
-import {AllureParams} from "../src/utils/allure.util";
+import {addAllure, AllureParams} from "../src/utils/allure.util";
 
 /* Allure Parameters */
 const allure: AllureParams = {
     description: "This test deletes a board.",
-    parentSuite: "Board Management",
-    suite: "Board CRUD",
-    subSuite: "Delete Board",
-    tags: ["@ui", "@board", "@smoke"],
+    suite: "Board Management",
+    tags: ["@ui", "@board", "@delete", "@smoke"],
 }
 
 const board: Board = {
@@ -24,8 +22,10 @@ test.beforeEach(async ({ apiCreateBoard}) => {
 
 
 test("delete board", {tag: [...allure.tags]}, async ({ page, homePage, listPage }) => {
-    // Test Data
+    // Allure
+    await addAllure(allure)
 
+    // Test Data
     await test.step('Navigate to the home page', async () => {
         await homePage.goToPage(`http://localhost:3000/board/${board.id}`)
     })

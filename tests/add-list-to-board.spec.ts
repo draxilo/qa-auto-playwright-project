@@ -1,15 +1,13 @@
 import {test} from "../src/fixtures/base.fixture";
 import {faker} from "@faker-js/faker";
 import {Board} from "../src/interfaces/board.interface";
-import {AllureParams} from "../src/utils/allure.util";
+import {addAllure, AllureParams} from "../src/utils/allure.util";
 
 /* Allure Parameters */
 const allure: AllureParams = {
     description: "This test adds a list to a board.",
-    parentSuite: "List Management",
-    suite: "List CRUD",
-    subSuite: "Add List",
-    tags: ["@ui", "@list", "@smoke"],
+    suite: "List Management",
+    tags: ["@ui", "@list", "@create", "@smoke"],
 }
 
 const board: Board = {
@@ -24,6 +22,9 @@ test.beforeEach(async ({apiCreateBoard}) => {
 })
 
 test('add list to board', {tag: [...allure.tags]}, async ({ homePage, listPage }) => {
+    // Allure
+    await addAllure(allure)
+
     // Test Data
     const listName =  faker.lorem.words(3);
 

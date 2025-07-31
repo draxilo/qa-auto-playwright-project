@@ -1,14 +1,12 @@
 import {test} from "../src/fixtures/base.fixture";
 import {faker} from "@faker-js/faker";
-import {AllureParams} from "../src/utils/allure.util";
+import {addAllure, AllureParams} from "../src/utils/allure.util";
 
 /* Allure Parameters */
 const allure: AllureParams = {
     description: "This test creates the first board.",
-    parentSuite: "Board Management",
-    suite: "Board CRUD",
-    subSuite: "Create First Board",
-    tags: ["@ui", "@board", "@smoke"],
+    suite: "Board Management",
+    tags: ["@ui", "@board", "@create", "@smoke"],
 }
 
 // Set up
@@ -17,6 +15,9 @@ test.beforeEach(async ({apiDeleteAllBoards}) => {
 })
 
 test('create first board', {tag: [...allure.tags]} ,async ({ page, getStartedPage, listPage }) => {
+    // Allure
+    await addAllure(allure)
+
     // Test Data
     const boardName =  faker.lorem.words(3);
 

@@ -1,15 +1,13 @@
-import {expect} from "@playwright/test";
 import {faker} from "@faker-js/faker";
 import {test} from "../src/fixtures/base.fixture";
 import {Board} from "../src/interfaces/board.interface";
-import {AllureParams} from "../src/utils/allure.util";
+import {addAllure, AllureParams} from "../src/utils/allure.util";
 
 /* Allure Parameters */
 const allure: AllureParams = {
     description: "This test creates a board.",
-    parentSuite: "Board Management",
-    suite: "Board CRUD",
-    tags: ["@ui", "@board", "@smoke"],
+    suite: "Board Management",
+    tags: ["@ui", "@board", "@create", "@smoke"],
 }
 
 let createdBoardId: string
@@ -25,6 +23,9 @@ test.beforeEach(async ({ apiCreateBoard}) => {
 })
 
 test("create board", {tag: [...allure.tags]} , async ({ homePage, listPage }) => {
+    // Allure
+    await addAllure(allure)
+
     // Test Data
     const boardName =  faker.lorem.words(3);
 

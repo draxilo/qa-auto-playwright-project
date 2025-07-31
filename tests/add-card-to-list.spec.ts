@@ -1,15 +1,13 @@
 import {test} from "../src/fixtures/base.fixture";
 import {faker} from "@faker-js/faker";
 import {Board} from "../src/interfaces/board.interface";
-import {AllureParams} from "../src/utils/allure.util";
+import {addAllure, AllureParams} from "../src/utils/allure.util";
 
 /* Allure Parameters */
 const allure: AllureParams = {
-    description: "This test adds a card to a list on a board.",
-    parentSuite: "Card Management",
-    suite: "Card CRUD",
-    subSuite: "Add Card",
-    tags: ["@ui", "@card", "@smoke"],
+    description: "This test adds a card to a list.",
+    suite: "Card Management",
+    tags: ["@ui", "@card", "@create", "@smoke"],
 }
 
 const board: Board = {
@@ -31,7 +29,10 @@ test.beforeEach(async ({apiCreateList, apiCreateBoard}) => {
     await apiCreateList(board);
 })
 
-test("add card to list", {tag: [...allure.tags]} ,  async ({ homePage, listPage }) => {
+test("add card to list", {tag: [...allure.tags]}, async ({ homePage, listPage }) => {
+    // Allure
+    await addAllure(allure)
+
     // Test Data
     const cardTitleInput = faker.lorem.words(3); // Generate a random card title
 
