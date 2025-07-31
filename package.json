@@ -6,7 +6,9 @@
     "test:smoke": "npx playwright test --grep '@smoke'",
     "test:regression": "npx playwright test --grep '@regression'",
     "test:all": "npx playwright test",
-    "test:all:chromium": "npx playwright test --project=chromium"
+    "test:all:chromium": "npx playwright test --project=chromium",
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write"
   },
   "author": "",
   "license": "ISC",
