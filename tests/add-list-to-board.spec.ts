@@ -1,13 +1,13 @@
-import { test } from "../src/fixtures/base.fixture";
-import { faker } from "@faker-js/faker";
-import { Board } from "../src/interfaces/board.interface";
-import { addAllure, AllureParams } from "../src/utils/allure.util";
+import { test } from '../src/fixtures/base.fixture';
+import { faker } from '@faker-js/faker';
+import { Board } from '../src/interfaces/board.interface';
+import { addAllure, AllureParams } from '../src/utils/allure.util';
 
 /* Allure Parameters */
 const allure: AllureParams = {
-  description: "This test adds a list to a board.",
-  suite: "List Management",
-  tags: ["@ui", "@list", "@create", "@smoke"],
+  description: 'This test adds a list to a board.',
+  suite: 'List Management',
+  tags: ['@ui', '@list', '@create', '@smoke'],
 };
 
 const board: Board = {
@@ -21,34 +21,30 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   board.id = createBoardResponseBody.id; // Store the board ID
 });
 
-test(
-  "add list to board",
-  { tag: [...allure.tags] },
-  async ({ homePage, listPage }) => {
-    // Allure
-    await addAllure(allure);
+test('add list to board', { tag: [...allure.tags] }, async ({ homePage, listPage }) => {
+  // Allure
+  await addAllure(allure);
 
-    // Test Data
-    const listName = faker.lorem.words(3);
+  // Test Data
+  const listName = faker.lorem.words(3);
 
-    await test.step("Navigate to board page", async () => {
-      await homePage.goToPage(`http://localhost:3000/board/${board.id}`);
-    });
+  await test.step('Navigate to board page', async () => {
+    await homePage.goToPage(`http://localhost:3000/board/${board.id}`);
+  });
 
-    await test.step("Add a new list", async () => {
-      //await listPage.clickInTheMiddle();
+  await test.step('Add a new list', async () => {
+    //await listPage.clickInTheMiddle();
 
-      //await listPage.createListButton.click();
+    //await listPage.createListButton.click();
 
-      await listPage.addListNameInput.fill(listName);
-      await listPage.addListButton.click();
-    });
+    await listPage.addListNameInput.fill(listName);
+    await listPage.addListButton.click();
+  });
 
-    await test.step("Assert that a new list is created", async () => {
-      await listPage.assertListCreated(listName);
-    });
-  },
-);
+  await test.step('Assert that a new list is created', async () => {
+    await listPage.assertListCreated(listName);
+  });
+});
 
 // Tear down
 test.afterEach(async ({ apiDeleteBoard }) => {

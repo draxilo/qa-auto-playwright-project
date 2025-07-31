@@ -1,15 +1,15 @@
-import * as allure from "allure-js-commons";
+import * as allure from 'allure-js-commons';
 
 /**
  * Interface representing the parameters for Allure reporting.
  */
 export interface AllureParams {
-    description?: string;
-    parentSuite?: string;
-    suite?: string;
-    subSuite?: string;
-    tag?: string;
-    tags?: string[];
+  description?: string;
+  parentSuite?: string;
+  suite?: string;
+  subSuite?: string;
+  tag?: string;
+  tags?: string[];
 }
 
 /**
@@ -22,16 +22,16 @@ export interface AllureParams {
  * @param {string} [params.subSuite] - The sub-suite name.
  */
 export const addAllure = async (params: AllureParams) => {
-    if (params.parentSuite) {
-        await allure.parentSuite(params.parentSuite);
-    }
-    if (params.suite) {
-        await allure.suite(params.suite);
-    }
-    if (params.subSuite) {
-        await allure.subSuite(params.subSuite);
-    }
-    if (params.description) {
-        await allure.description(params.description);
-    }
+  if (params.parentSuite) {
+    await allure.parentSuite(params.parentSuite);
+  }
+  if (params.suite) {
+    await allure.suite(params.suite);
+  }
+  if (params.subSuite) {
+    await allure.subSuite(params.subSuite);
+  }
+  if (params.description) {
+    await allure.description(params.description);
+  }
 };

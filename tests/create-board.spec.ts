@@ -1,13 +1,13 @@
-import { faker } from "@faker-js/faker";
-import { test } from "../src/fixtures/base.fixture";
-import { Board } from "../src/interfaces/board.interface";
-import { addAllure, AllureParams } from "../src/utils/allure.util";
+import { faker } from '@faker-js/faker';
+import { test } from '../src/fixtures/base.fixture';
+import { Board } from '../src/interfaces/board.interface';
+import { addAllure, AllureParams } from '../src/utils/allure.util';
 
 /* Allure Parameters */
 const allure: AllureParams = {
-  description: "This test creates a board.",
-  suite: "Board Management",
-  tags: ["@ui", "@board", "@create", "@smoke"],
+  description: 'This test creates a board.',
+  suite: 'Board Management',
+  tags: ['@ui', '@board', '@create', '@smoke'],
 };
 
 let createdBoardId: string;
@@ -22,33 +22,28 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   board.id = createBoardResponseBody.id; // Store the board ID
 });
 
-test(
-  "create board",
-  { tag: [...allure.tags] },
-  async ({ homePage, listPage }) => {
-    // Allure
-    await addAllure(allure);
+test('create board', { tag: [...allure.tags] }, async ({ homePage, listPage }) => {
+  // Allure
+  await addAllure(allure);
 
-    // Test Data
-    const boardName = faker.lorem.words(3);
+  // Test Data
+  const boardName = faker.lorem.words(3);
 
-    await test.step("Navigate to the home page", async () => {
-      await homePage.goToPage("");
-    });
+  await test.step('Navigate to the home page', async () => {
+    await homePage.goToPage('');
+  });
 
-    await test.step("Create a board and get its ID", async () => {
-      await homePage.createBoardItem.click();
-      await homePage.newBoardInput.fill(boardName);
-      await homePage.createBoardButton.click();
-      createdBoardId =
-        await homePage.waitForUrlAndGetLastPathSegment(/\/board\//);
-    });
+  await test.step('Create a board and get its ID', async () => {
+    await homePage.createBoardItem.click();
+    await homePage.newBoardInput.fill(boardName);
+    await homePage.createBoardButton.click();
+    createdBoardId = await homePage.waitForUrlAndGetLastPathSegment(/\/board\//);
+  });
 
-    await test.step("Assert Board created", async () => {
-      await listPage.assertBoardCreated(boardName);
-    });
-  },
-);
+  await test.step('Assert Board created', async () => {
+    await listPage.assertBoardCreated(boardName);
+  });
+});
 
 // Tear down
 test.afterEach(async ({ apiDeleteListOfBoards }) => {

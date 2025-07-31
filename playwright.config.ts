@@ -26,10 +26,15 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   outputDir: 'test-results',
 
-  reporter: [["line"], ["allure-playwright",
-    {
-      resultsDir: "test-results/allure-results",
-    }]],
+  reporter: [
+    ['line'],
+    [
+      'allure-playwright',
+      {
+        resultsDir: 'test-results/allure-results',
+      },
+    ],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     testIdAttribute: 'data-cy',
@@ -41,9 +46,8 @@ export default defineConfig({
     /* Screenshot on failure */
     screenshot: 'only-on-failure',
 
-    video: "retain-on-failure"
+    video: 'retain-on-failure',
   },
-
 
   /* Configure projects for major browsers */
   projects: [

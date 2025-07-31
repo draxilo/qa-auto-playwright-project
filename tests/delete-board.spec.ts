@@ -1,13 +1,13 @@
-import { test } from "../src/fixtures/base.fixture";
-import { faker } from "@faker-js/faker";
-import { Board } from "../src/interfaces/board.interface";
-import { addAllure, AllureParams } from "../src/utils/allure.util";
+import { test } from '../src/fixtures/base.fixture';
+import { faker } from '@faker-js/faker';
+import { Board } from '../src/interfaces/board.interface';
+import { addAllure, AllureParams } from '../src/utils/allure.util';
 
 /* Allure Parameters */
 const allure: AllureParams = {
-  description: "This test deletes a board.",
-  suite: "Board Management",
-  tags: ["@ui", "@board", "@delete", "@smoke"],
+  description: 'This test deletes a board.',
+  suite: 'Board Management',
+  tags: ['@ui', '@board', '@delete', '@smoke'],
 };
 
 const board: Board = {
@@ -20,27 +20,23 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   board.id = createBoardResponseBody.id; // Store the board ID
 });
 
-test(
-  "delete board",
-  { tag: [...allure.tags] },
-  async ({ page, homePage, listPage }) => {
-    // Allure
-    await addAllure(allure);
+test('delete board', { tag: [...allure.tags] }, async ({ page, homePage, listPage }) => {
+  // Allure
+  await addAllure(allure);
 
-    // Test Data
-    await test.step("Navigate to the home page", async () => {
-      await homePage.goToPage(`http://localhost:3000/board/${board.id}`);
-    });
+  // Test Data
+  await test.step('Navigate to the home page', async () => {
+    await homePage.goToPage(`http://localhost:3000/board/${board.id}`);
+  });
 
-    await test.step("Delete the board", async () => {
-      await listPage.boardOptionsButton.click();
-      await listPage.deleteBoardButton.click();
+  await test.step('Delete the board', async () => {
+    await listPage.boardOptionsButton.click();
+    await listPage.deleteBoardButton.click();
 
-      await page.reload(); // Reload the page to ensure the board is deleted
-    });
+    await page.reload(); // Reload the page to ensure the board is deleted
+  });
 
-    await test.step("Assert Board is deleted", async () => {
-      await homePage.boardIsDeleted(board.name);
-    });
-  },
-);
+  await test.step('Assert Board is deleted', async () => {
+    await homePage.boardIsDeleted(board.name);
+  });
+});
