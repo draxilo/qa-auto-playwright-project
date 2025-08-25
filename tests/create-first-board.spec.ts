@@ -1,6 +1,6 @@
-import { test } from '../src/fixtures/base.fixture';
+import { test } from '@/fixtures/base.fixture';
 import { faker } from '@faker-js/faker';
-import { addAllure, AllureParams } from '../src/utils/allure.util';
+import { addAllure, AllureParams } from '@/utils/allure.util';
 
 /* Allure Parameters */
 const allure: AllureParams = {
