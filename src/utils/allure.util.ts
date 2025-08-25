@@ -21,7 +21,7 @@ export interface AllureParams {
  * @param {string} [params.suite] - The suite name.
  * @param {string} [params.subSuite] - The sub-suite name.
  */
-export const addAllure = async (params: AllureParams) => {
+export const addAllure = async (params: AllureParams): Promise<void> => {
   if (params.parentSuite) {
     await allure.parentSuite(params.parentSuite);
   }

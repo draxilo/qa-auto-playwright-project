@@ -29,17 +29,10 @@
     /* Skip type checking of declaration files */
     "skipLibCheck": true,
     /* Disallow inconsistently-cased references to the same file */
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
   /* Specifies an array of filenames or patterns to include in the program */
-  "include": [
-    "src/**/*",
-    "tests/**/*",
-    "playwright.config.ts"
-  ],
+  "include": ["src/**/*", "tests/**/*", "playwright.config.ts"],
   /* Specifies an array of filenames or patterns that should be skipped when resolving include */
-  "exclude": [
-    "node_modules",
-    "test-results",
-  ]
+  "exclude": ["node_modules", "test-results"]
 }

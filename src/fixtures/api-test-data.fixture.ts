@@ -1,7 +1,6 @@
 import { APIResponse, expect } from '@playwright/test';
 import { Board } from '../interfaces/board.interface';
 import { test as base } from '@playwright/test';
-import { List } from '../interfaces/list.interface';
 
 interface ApiTestDataFixture {
   apiCreateBoard(board: Board): Promise<APIResponse>;

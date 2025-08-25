@@ -32,22 +32,23 @@ export class ListPage extends BasePage {
   }
 
   // Assertions
-  async assertListCreated(listName: string) {
+  async assertListCreated(listName: string): Promise<void> {
     await expect(this.listName).toBeVisible();
     await expect(this.listName).toHaveValue(listName);
   }
 
-  async assertBoardTitle(boardTitle: string) {
-    await expect(this.boardTitle).toBeVisible();
-    //await expect(this.boardTitle).toHaveText(boardTitle); // This is not working
-  }
+  // TODO: This assertion is not working as expected, needs investigation
+  // async assertBoardTitle(boardTitle: string) {
+  //   await expect(this.boardTitle).toBeVisible();
+  //   await expect(this.boardTitle).toHaveText(boardTitle); // This is not working
+  // }
 
-  async assertCardCreated(cardTitleInput: string) {
+  async assertCardCreated(cardTitleInput: string): Promise<void> {
     await expect(this.cardItem).toBeVisible();
     await expect(this.cardItemText).toHaveText(cardTitleInput);
   }
 
-  async assertBoardCreated(boardTitle: string) {
+  async assertBoardCreated(boardTitle: string): Promise<void> {
     await expect(this.boardTitle).toBeVisible();
     await expect(this.boardTitle).toHaveValue(boardTitle);
   }

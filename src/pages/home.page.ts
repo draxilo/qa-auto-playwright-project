@@ -26,10 +26,10 @@ export class HomePage extends BasePage {
   }
 
   // Assertions
-  async boardIsDeleted(boardName: string) {
-    expect(
+  async boardIsDeleted(boardName: string): Promise<void> {
+    await expect(
       this.page.locator(`//div[@data-cy="board-item" and .//h2[text()="${boardName}"]]`),
-    ).not.toBeVisible();
+    ).toBeHidden();
     await expect(this.boardTitle).not.toHaveText([boardName]);
   }
 }

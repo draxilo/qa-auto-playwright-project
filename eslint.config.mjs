@@ -37,7 +37,12 @@ export default tseslint.config({
     'playwright/expect-expect': [
       'warn',
       {
-        assertFunctionNames: [], // Recognize custom assertion functions
+        assertFunctionNames: [
+          'boardIsDeleted',
+          'assertBoardCreated',
+          'assertCardCreated',
+          'assertListCreated',
+        ], // Recognize custom assertion functions
       },
     ],
     'playwright/no-wait-for-timeout': 'warn', // Discourage waitForTimeout usage

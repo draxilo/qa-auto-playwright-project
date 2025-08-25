@@ -36,6 +36,7 @@ test('delete board', { tag: [...allure.tags] }, async ({ page, homePage, listPag
     await page.reload(); // Reload the page to ensure the board is deleted
   });
 
+  // Assert Board is deleted
   await test.step('Assert Board is deleted', async () => {
     await homePage.boardIsDeleted(board.name);
   });

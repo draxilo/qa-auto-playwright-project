@@ -7,11 +7,11 @@ export class BasePage {
     this.page = page;
   }
 
-  async goToPage(url: string) {
+  async goToPage(url: string): Promise<void> {
     await this.page.goto(url);
   }
 
-  async clickInTheMiddle() {
+  async clickInTheMiddle(): Promise<void> {
     const viewport = this.page.viewportSize();
     if (viewport) {
       const centerX = viewport.width / 2;
