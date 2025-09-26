@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "test:playwright": "npx playwright test --verbose",
     "test:smoke": "npx playwright test --grep '@smoke'",
     "test:regression": "npx playwright test --grep '@regression'",
-    "test:all": "npx playwright test",
+    "start:practice": "npm start --prefix ../trelloapp-vue-vite-ts",
+    "test:all": "start-server-and-test start:practice http://localhost:3000 test:playwright",
     "test:all:chromium": "npx playwright test --project=chromium",
     "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
@@ -28,6 +30,7 @@
     "eslint-plugin-playwright": "^2.2.2",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
+    "start-server-and-test": "^2.1.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0"
   },
