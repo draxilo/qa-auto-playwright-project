@@ -4,9 +4,11 @@
   "main": "index.js",
   "scripts": {
     "test:playwright": "npx playwright test --verbose",
-    "test:smoke": "npx playwright test --config=playwright.web.config.ts --grep='@smoke''",
+    "test:smoke": "npx playwright test --grep='@smoke''",
     "test:regression": "npx playwright test --grep '@regression'",
-    "test:all": "npx playwright test --config=playwright.web.config.ts",
+    "test:api": "npx playwright test --config=playwright.api.config.ts",
+    "test:web": "npx playwright test --config=playwright.web.config.ts",
+    "test:all": "npx playwright test",
     "test:all:chromium": "npx playwright test --project=chromium",
     "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
@@ -30,7 +32,6 @@
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0"
     "typescript-eslint": "^8.38.0",
     "zod": "^4.1.11"
   },
