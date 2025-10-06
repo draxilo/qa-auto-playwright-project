@@ -1,5 +1,5 @@
 import { APIResponse, expect } from '@playwright/test';
-import { Board } from '../interfaces/board.interface';
+import { Board } from '@/interfaces/board.interface';
 import { test as base } from '@playwright/test';
 
 interface ApiTestDataFixture {
