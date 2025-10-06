@@ -2,6 +2,7 @@ import { test } from '@/fixtures/base.fixture';
 import { faker } from '@faker-js/faker';
 import { APIResponse, expect } from '@playwright/test';
 import { addAllure, AllureParams } from '@/utils/allure.util';
+import { Board } from '@/interfaces/board.interface';
 
 const allure: AllureParams = {
   description: 'This test deletes a board via API.',
