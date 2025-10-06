@@ -1,4 +1,4 @@
-import { defineConfig, devices } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -40,23 +40,20 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    baseURL: 'http://localhost:3000/',
+    baseURL: 'http://localhost:3000',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',
 
-    // extraHTTPHeaders: {
-    //   'Content-Type': 'application/json',
-    // },
+    extraHTTPHeaders: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+    },
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'API',
-      use: {
-        ...devices['Desktop Chrome'],
-        extraHTTPHeaders: { 'Content-Type': 'application/json' },
-      },
     },
   ],
 
@@ -65,5 +62,6 @@ export default defineConfig({
     command: 'npm start --prefix ../trelloapp-vue-vite-ts',
     url: 'http://127.0.0.1:3000',
     reuseExistingServer: !process.env.CI,
+    stderr: 'ignore', // hides deprecation warnings and Browserslist warnings
   },
 });
