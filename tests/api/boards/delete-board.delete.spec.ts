@@ -28,7 +28,7 @@ test('Delete Board API', async ({ request }) => {
   let deleteResponse: APIResponse;
 
   await test.step('Delete Board via API', async () => {
-    deleteResponse = await request.delete(`/api/boards/${boardId}`);
+    deleteResponse = await request.delete(`/api/boards/${board.id}`);
   });
 
   await test.step('Check status code of the response', async () => {
@@ -36,7 +36,7 @@ test('Delete Board API', async ({ request }) => {
   });
 
   await test.step('Verify the board is deleted', async () => {
-    const getResponse = await request.get(`/api/boards/${boardId}`);
+    const getResponse = await request.get(`/api/boards/${board.id}`);
     expect(getResponse.status()).toBe(500);
   });
 });
