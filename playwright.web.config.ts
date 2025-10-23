@@ -6,7 +6,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, '.env'), quiet: true });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -26,14 +26,14 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : 1,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  outputDir: 'test-results',
+  outputDir: 'reports/test-results',
 
   reporter: [
     ['line'],
     [
       'allure-playwright',
       {
-        resultsDir: 'test-results/allure-results',
+        resultsDir: 'reports/allure-results',
       },
     ],
   ],
