@@ -10,7 +10,7 @@ import { TAGS } from '@/consts/tag.const';
 const allure: AllureParams = {
   description: 'This test creates a list via API.',
   parentSuite: PARENT_SUITE.API,
-  suite: SUITE.BOARDS,
+  suite: SUITE.LISTS,
   tags: [TAGS.API, TAGS.LIST, TAGS.CREATE, TAGS.SMOKE],
 };
 
