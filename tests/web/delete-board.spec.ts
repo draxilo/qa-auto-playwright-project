@@ -2,11 +2,13 @@ import { test } from '@/fixtures/base.fixture';
 import { faker } from '@faker-js/faker';
 import { Board } from '@/interfaces/board.interface';
 import { addAllure, AllureParams } from '@/utils/allure.util';
+import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
 
 /* Allure Parameters */
 const allure: AllureParams = {
   description: 'This test deletes a board.',
-  suite: 'Board Management',
+  parentSuite: PARENT_SUITE.WEB,
+  suite: SUITE.BOARDS,
   tags: ['@ui', '@board', '@delete', '@smoke'],
 };
 
