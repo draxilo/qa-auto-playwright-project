@@ -3,9 +3,11 @@ import { addAllure, AllureParams } from '@/utils/allure.util';
 import { faker } from '@faker-js/faker';
 import { APIResponse, expect } from '@playwright/test';
 import { Board } from '@/interfaces/board.interface';
+import { PARENT_SUITE } from '@/consts/parent-suite.const';
 
 const allure: AllureParams = {
   description: 'This test creates a board via API.',
+  parentSuite: PARENT_SUITE.API,
   suite: 'Board Management',
   tags: ['@api', '@board', '@create', '@smoke'],
 };

@@ -3,10 +3,12 @@ import { faker } from '@faker-js/faker';
 import { expect } from '@playwright/test';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { Board } from '@/interfaces/board.interface';
+import { PARENT_SUITE } from '@/consts/parent-suite.const';
 
 const allure: AllureParams = {
   description: 'This test renames a board via API.',
-  suite: 'Board Management',
+  parentSuite: PARENT_SUITE.API,
+  suite: 'Boards',
   tags: ['@api', '@board', '@update', '@smoke'],
 };
 
