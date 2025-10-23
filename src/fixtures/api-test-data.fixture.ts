@@ -1,6 +1,7 @@
 import { APIResponse, expect } from '@playwright/test';
 import { Board } from '@/interfaces/board.interface';
 import { test as base } from '@playwright/test';
+import { List } from '@/interfaces/list.interface';
 
 interface ApiTestDataFixture {
   apiCreateBoard(board: Board): Promise<APIResponse>;
@@ -8,6 +9,7 @@ interface ApiTestDataFixture {
   apiDeleteListOfBoards(boardIds: number[]): Promise<Array<APIResponse>>;
   apiDeleteAllBoards(): Promise<APIResponse>;
   apiCreateList(board: Board): Promise<Array<APIResponse>>;
+  apiDeleteList(list: List): Promise<APIResponse>;
 }
 
 export const test = base.extend<ApiTestDataFixture>({
@@ -20,13 +22,6 @@ export const test = base.extend<ApiTestDataFixture>({
       });
 
       expect(response.status()).toBe(201);
-      return response;
-    });
-  },
-  apiDeleteBoard: async ({ baseURL, request }, use) => {
-    await use(async (board: Board) => {
-      const response = await request.delete(`${baseURL}/api/boards/${board.id}`);
-      expect(response.status()).toBe(200);
       return response;
     });
   },
@@ -47,6 +42,13 @@ export const test = base.extend<ApiTestDataFixture>({
       return responses;
     });
   },
+  apiDeleteBoard: async ({ baseURL, request }, use) => {
+    await use(async (board: Board) => {
+      const response = await request.delete(`${baseURL}/api/boards/${board.id}`);
+      expect(response.status()).toBe(200);
+      return response;
+    });
+  },
   apiDeleteListOfBoards: async ({ baseURL, request }, use) => {
     await use(async (boardIds: number[] | Board[]) => {
       const responses: Array<APIResponse> = [];
@@ -62,6 +64,13 @@ export const test = base.extend<ApiTestDataFixture>({
     await use(async () => {
       const response = await request.delete(`${baseURL}/api/boards`);
       expect(response.status()).toBe(204);
+      return response;
+    });
+  },
+  apiDeleteList: async ({ baseURL, request }, use) => {
+    await use(async (list: List) => {
+      const response = await request.delete(`${baseURL}/api/lists/${list.id}`);
+      expect(response.status()).toBe(200);
       return response;
     });
   },
