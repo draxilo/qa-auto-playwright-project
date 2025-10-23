@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 import { APIResponse, expect } from '@playwright/test';
 import { Board } from '@/interfaces/board.interface';
 import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
-import { TAGS } from '@/consts/tags.const';
+import { TAGS } from '@/consts/tag.const';
 
 const allure: AllureParams = {
   description: 'This test creates a board via API.',

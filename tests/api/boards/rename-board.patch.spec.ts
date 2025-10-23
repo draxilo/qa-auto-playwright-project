@@ -4,7 +4,7 @@ import { expect } from '@playwright/test';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { Board } from '@/interfaces/board.interface';
 import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
-import { TAGS } from '@/consts/tags.const';
+import { TAGS } from '@/consts/tag.const';
 
 const allure: AllureParams = {
   description: 'This test renames a board via API.',

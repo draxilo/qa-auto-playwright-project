@@ -3,7 +3,7 @@ import { test } from '@/fixtures/base.fixture';
 import { Board } from '@/interfaces/board.interface';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
-import { TAGS } from '@/consts/tags.const';
+import { TAGS } from '@/consts/tag.const';
 
 /* Allure Parameters */
 const allure: AllureParams = {
