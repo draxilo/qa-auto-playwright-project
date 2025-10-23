@@ -8,13 +8,16 @@
     "test:regression": "npx playwright test --grep '@regression'",
     "test:api": "npx playwright test --config=playwright.api.config.ts",
     "test:web": "npx playwright test --config=playwright.web.config.ts",
-    "test:all": "npx playwright test",
+    "test:all": "npm run test:api ; npm run test:web",
+    "allure:generate": "allure generate reports/allure-results --clean",
+    "allure:serve": "allure serve reports/allure-results",
     "test:all:chromium": "npx playwright test --project=chromium",
     "prettier": "prettier . --check",
     "prettier:fix": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepare": "husky"
+    "prepare": "husky",
+    "clean": "rimraf ./reports"
   },
   "author": "",
   "license": "ISC",
@@ -31,6 +34,7 @@
     "eslint-plugin-playwright": "^2.2.2",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
+    "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
     "zod": "^4.1.11"
