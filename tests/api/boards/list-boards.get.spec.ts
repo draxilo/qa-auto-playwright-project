@@ -6,12 +6,13 @@ import { addAllure, AllureParams } from '@/utils/allure.util';
 import { faker } from '@faker-js/faker';
 import { Board } from '@/interfaces/board.interface';
 import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
+import { TAGS } from '@/consts/tags.const';
 
 const allure: AllureParams = {
   description: 'This test retrieves the list of boards via API.',
   parentSuite: PARENT_SUITE.API,
   suite: SUITE.BOARDS,
-  tags: ['@api', '@board', '@list', '@smoke'],
+  tags: [TAGS.API, TAGS.BOARD, TAGS.LIST, TAGS.SMOKE],
 };
 
 const board: Board = {

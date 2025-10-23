@@ -3,13 +3,14 @@ import { test } from '@/fixtures/base.fixture';
 import { Board } from '@/interfaces/board.interface';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
+import { TAGS } from '@/consts/tags.const';
 
 /* Allure Parameters */
 const allure: AllureParams = {
   description: 'This test creates a board.',
   parentSuite: PARENT_SUITE.WEB,
   suite: SUITE.BOARDS,
-  tags: ['@ui', '@board', '@create', '@smoke'],
+  tags: [TAGS.UI, TAGS.BOARD, TAGS.CREATE, TAGS.SMOKE],
 };
 
 let createdBoardId: string;

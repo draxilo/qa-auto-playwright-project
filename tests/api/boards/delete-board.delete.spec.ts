@@ -4,12 +4,13 @@ import { APIResponse, expect } from '@playwright/test';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { Board } from '@/interfaces/board.interface';
 import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
+import { TAGS } from '@/consts/tags.const';
 
 const allure: AllureParams = {
   description: 'This test deletes a board via API.',
   parentSuite: PARENT_SUITE.API,
   suite: SUITE.BOARDS,
-  tags: ['@api', '@board', '@delete', '@smoke'],
+  tags: [TAGS.API, TAGS.BOARD, TAGS.DELETE, TAGS.SMOKE],
 };
 
 const board: Board = {

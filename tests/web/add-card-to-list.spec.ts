@@ -3,13 +3,14 @@ import { faker } from '@faker-js/faker';
 import { Board } from '@/interfaces/board.interface';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
+import { TAGS } from '@/consts/tags.const';
 
 /* Allure Parameters */
 const allure: AllureParams = {
   description: 'This test adds a card to a list.',
   parentSuite: PARENT_SUITE.WEB,
   suite: SUITE.CARDS,
-  tags: ['@ui', '@card', '@create', '@smoke'],
+  tags: [TAGS.UI, TAGS.CARD, TAGS.CREATE, TAGS.SMOKE],
 };
 
 const board: Board = {
