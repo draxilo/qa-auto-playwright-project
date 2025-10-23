@@ -19,11 +19,11 @@ const board: Board = {
 test('Create Board API', async ({ request }) => {
   await addAllure(allure);
 
-  let response: APIResponse;
+  let response!: APIResponse;
 
   await test.step('Create board via API', async () => {
     response = await request.post('/api/boards', {
-      data: { name: board.name },
+      data: board,
     });
 
     const responseBody = await response.json();
