@@ -3,12 +3,12 @@ import { faker } from '@faker-js/faker';
 import { APIResponse, expect } from '@playwright/test';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { Board } from '@/interfaces/board.interface';
-import { PARENT_SUITE } from '@/consts/parent-suite.const';
+import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
 
 const allure: AllureParams = {
   description: 'This test deletes a board via API.',
   parentSuite: PARENT_SUITE.API,
-  suite: 'Board Management',
+  suite: SUITE.BOARDS,
   tags: ['@api', '@board', '@delete', '@smoke'],
 };
 

@@ -5,12 +5,12 @@ import { boardsSchema } from '@/schemas/boards.schema';
 import { addAllure, AllureParams } from '@/utils/allure.util';
 import { faker } from '@faker-js/faker';
 import { Board } from '@/interfaces/board.interface';
-import { PARENT_SUITE } from '@/consts/parent-suite.const';
+import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
 
 const allure: AllureParams = {
   description: 'This test retrieves the list of boards via API.',
   parentSuite: PARENT_SUITE.API,
-  suite: 'Board Management',
+  suite: SUITE.BOARDS,
   tags: ['@api', '@board', '@list', '@smoke'],
 };
 
