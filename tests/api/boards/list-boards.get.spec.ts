@@ -17,11 +17,13 @@ const board: Board = {
 };
 
 test.beforeEach(async ({ apiCreateBoard }) => {
-  const createResponse = await apiCreateBoard({ name: board.name });
-  expect(createResponse.status()).toBe(201);
+  await test.step('Prepare Board before test via API', async () => {
+    const createResponse = await apiCreateBoard(board);
+    expect(createResponse.status()).toBe(201);
 
-  const createResponseBody = await createResponse.json();
-  board.id = createResponseBody.id;
+    const responseBody = await createResponse.json();
+    board.id = responseBody.id;
+  });
 });
 
 test('Get Boards API', async ({ request }) => {
@@ -46,5 +48,7 @@ test('Get Boards API', async ({ request }) => {
 
 // Tear down
 test.afterEach(async ({ apiDeleteBoard }) => {
-  await apiDeleteBoard(board);
+  await test.step('Clear Board after test via API', async () => {
+    await apiDeleteBoard(board);
+  });
 });

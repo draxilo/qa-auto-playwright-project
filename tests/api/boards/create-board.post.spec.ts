@@ -35,5 +35,7 @@ test('Create Board API', async ({ request }) => {
 
 // Tear down
 test.afterEach(async ({ apiDeleteBoard }) => {
-  await apiDeleteBoard(board);
+  await test.step('Clear Board after test via API', async () => {
+    await apiDeleteBoard(board);
+  });
 });
