@@ -4,7 +4,7 @@ import { List } from '@/interfaces/list.interface';
 import { Board } from '@/interfaces/board.interface';
 import { APIResponse, expect } from '@playwright/test';
 import { addAllure, AllureParams } from '@/utils/allure.util';
-import { PARENT_SUITE, SUITE } from '@/consts/parent-suite.const';
+import { PARENT_SUITE, SUITE } from '@/consts/suites.const';
 import { TAGS } from '@/consts/tag.const';
 
 const allure: AllureParams = {
