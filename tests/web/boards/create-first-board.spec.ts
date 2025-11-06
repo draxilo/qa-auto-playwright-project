@@ -1,8 +1,8 @@
-import { test } from '@/fixtures/base.fixture';
+import { test } from '@fixtures/base.fixture';
 import { faker } from '@faker-js/faker';
-import { addAllure, AllureParams } from '@/utils/allure.util';
-import { PARENT_SUITE, SUITE } from '@/consts/suites.const';
-import { TAGS } from '@/consts/tag.const';
+import { addAllure, AllureParams } from '@utils/allure.util';
+import { PARENT_SUITE, SUITE } from '@consts/suites.const';
+import { TAGS } from '@consts/tag.const';
 
 /* Allure Parameters */
 const allure: AllureParams = {

@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
-import { test } from '@/fixtures/base.fixture';
-import { Board } from '@/interfaces/board.interface';
-import { addAllure, AllureParams } from '@/utils/allure.util';
-import { PARENT_SUITE, SUITE } from '@/consts/suites.const';
-import { TAGS } from '@/consts/tag.const';
+import { test } from '@fixtures/base.fixture';
+import { Board } from '@interfaces/board.interface';
+import { addAllure, AllureParams } from '@utils/allure.util';
+import { PARENT_SUITE, SUITE } from '@consts/suites.const';
+import { TAGS } from '@consts/tag.const';
 
 /* Allure Parameters */
 const allure: AllureParams = {
