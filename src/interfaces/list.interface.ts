@@ -4,5 +4,4 @@ export interface List {
   id?: string;
   name: string;
   cards?: Array<Card>;
-  boardId?: string;
 }
