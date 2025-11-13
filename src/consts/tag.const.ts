@@ -9,6 +9,7 @@ export const TAGS = {
   CREATE: '@create',
   UPDATE: '@update',
   DELETE: '@delete',
+  GET: '@get',
 
   SMOKE: '@smoke',
 };

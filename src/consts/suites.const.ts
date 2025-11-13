@@ -7,4 +7,5 @@ export const SUITE = {
   BOARDS: 'Boards',
   LISTS: 'Lists',
   CARDS: 'Cards',
+  SETUP: 'Setup',
 };
