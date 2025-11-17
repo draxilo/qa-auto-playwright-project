@@ -4,6 +4,7 @@ import { Board } from '@interfaces/board.interface';
 import { addAllure, AllureParams } from '@utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@consts/suites.const';
 import { TAGS } from '@consts/tag.const';
+import { step } from 'allure-js-commons';
 
 /* Allure Parameters */
 const allure: AllureParams = {
@@ -24,16 +25,16 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   board.id = createBoardResponseBody.id; // Store the board ID
 });
 
-test('delete board', { tag: [...allure.tags] }, async ({ page, homePage, listPage }) => {
+test('Delete board', { tag: [...allure.tags] }, async ({ page, homePage, listPage }) => {
   // Allure
   await addAllure(allure);
 
   // Test Data
-  await test.step('Navigate to the home page', async () => {
-    await homePage.goToPage(`http://localhost:3000/board/${board.id}`);
+  await step('Navigate to the board page', async () => {
+    await listPage.goToPage(`/board/${board.id}`);
   });
 
-  await test.step('Delete the board', async () => {
+  await step('Delete the board', async () => {
     await listPage.boardOptionsButton.click();
     await listPage.deleteBoardButton.click();
 
@@ -41,7 +42,7 @@ test('delete board', { tag: [...allure.tags] }, async ({ page, homePage, listPag
   });
 
   // Assert Board is deleted
-  await test.step('Assert Board is deleted', async () => {
+  await step('Assert Board is deleted', async () => {
     await homePage.boardIsDeleted(board.name);
   });
 });

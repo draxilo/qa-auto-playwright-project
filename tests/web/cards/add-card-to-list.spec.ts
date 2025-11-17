@@ -4,6 +4,7 @@ import { Board } from '@interfaces/board.interface';
 import { addAllure, AllureParams } from '@utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@consts/suites.const';
 import { TAGS } from '@consts/tag.const';
+import { step } from 'allure-js-commons';
 
 /* Allure Parameters */
 const allure: AllureParams = {
@@ -24,32 +25,32 @@ const board: Board = {
 };
 
 // Set up
-test.beforeEach(async ({ apiCreateLists, apiCreateBoard }) => {
+test.beforeEach(async ({ apiCreateMultipleLists, apiCreateBoard }) => {
   const createBoardResponse = await apiCreateBoard(board);
   const createBoardResponseBody = await createBoardResponse.json();
   board.id = createBoardResponseBody.id; // Store the board ID
 
-  await apiCreateLists(board);
+  await apiCreateMultipleLists(board);
 });
 
-test('add card to list', { tag: [...allure.tags] }, async ({ homePage, listPage }) => {
+test('Add card to list', { tag: [...allure.tags] }, async ({ listPage }) => {
   // Allure
   await addAllure(allure);
 
   // Test Data
   const cardTitleInput = faker.lorem.words(3); // Generate a random card title
 
-  await test.step('Navigate to the board and add a card', async () => {
-    await homePage.goToPage(`http://localhost:3000/board/${board.id}`);
+  await step('Navigate to the board and add a card', async () => {
+    await listPage.goToPage(`/board/${board.id}`);
   });
 
-  await test.step('Add a card to the list', async () => {
+  await step('Add a card to the list', async () => {
     await listPage.addAnotherCardButton.last().click();
     await listPage.cardTitleInput.fill(cardTitleInput);
     await listPage.addCardButton.click();
   });
 
-  await test.step('Assert Card is added to the list', async () => {
+  await step('Assert Card is added to the list', async () => {
     await listPage.assertCardCreated(cardTitleInput);
   });
 });

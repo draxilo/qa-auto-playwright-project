@@ -4,6 +4,7 @@ import { Board } from '@interfaces/board.interface';
 import { addAllure, AllureParams } from '@utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@consts/suites.const';
 import { TAGS } from '@consts/tag.const';
+import { step } from 'allure-js-commons';
 
 /* Allure Parameters */
 const allure: AllureParams = {
@@ -24,27 +25,23 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   board.id = createBoardResponseBody.id; // Store the board ID
 });
 
-test('add list to board', { tag: [...allure.tags] }, async ({ homePage, listPage }) => {
+test('Add list to board', { tag: [...allure.tags] }, async ({ listPage }) => {
   // Allure
   await addAllure(allure);
 
   // Test Data
   const listName = faker.lorem.words(3);
 
-  await test.step('Navigate to board page', async () => {
-    await homePage.goToPage(`http://localhost:3000/board/${board.id}`);
+  await step('Navigate to board page', async () => {
+    await listPage.goToPage(`/board/${board.id}`);
   });
 
-  await test.step('Add a new list', async () => {
-    //await listPage.clickInTheMiddle();
-
-    //await listPage.createListButton.click();
-
+  await step('Add a new list', async () => {
     await listPage.addListNameInput.fill(listName);
     await listPage.addListButton.click();
   });
 
-  await test.step('Assert that a new list is created', async () => {
+  await step('Assert that a new list is created', async () => {
     await listPage.assertListCreated(listName);
   });
 });

@@ -4,6 +4,7 @@ import { Board } from '@interfaces/board.interface';
 import { addAllure, AllureParams } from '@utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@consts/suites.const';
 import { TAGS } from '@consts/tag.const';
+import { step } from 'allure-js-commons';
 
 /* Allure Parameters */
 const allure: AllureParams = {
@@ -13,7 +14,6 @@ const allure: AllureParams = {
   tags: [TAGS.UI, TAGS.BOARD, TAGS.CREATE, TAGS.SMOKE],
 };
 
-let createdBoardId: string;
 const board: Board = {
   name: faker.lorem.words(3),
 };
@@ -22,38 +22,33 @@ const board: Board = {
 test.beforeEach(async ({ apiCreateBoard }) => {
   const createBoardResponse = await apiCreateBoard(board);
   const createBoardResponseBody = await createBoardResponse.json();
-  board.id = createBoardResponseBody.id; // Store the board ID
+  board.id = createBoardResponseBody.id;
 });
 
-test('create board', { tag: [...allure.tags] }, async ({ homePage, listPage }) => {
+test('Create board', { tag: [...allure.tags] }, async ({ homePage, listPage }) => {
   // Allure
   await addAllure(allure);
 
-  // Test Data
   const boardName = faker.lorem.words(3);
 
-  await test.step('Navigate to the home page', async () => {
+  await step('Navigate to the home page', async () => {
     await homePage.goToPage('');
   });
 
-  await test.step('Create a board and get its ID', async () => {
+  await step('Create a board and get its ID', async () => {
     await homePage.createBoardItem.click();
     await homePage.newBoardInput.fill(boardName);
     await homePage.createBoardButton.click();
-    createdBoardId = await homePage.waitForUrlAndGetLastPathSegment(/\/board\//);
   });
 
-  await test.step('Assert Board created', async () => {
+  await step('Assert Board created', async () => {
     await listPage.assertBoardCreated(boardName);
   });
 });
 
 // Tear down
-test.afterEach(async ({ apiDeleteListOfBoards }) => {
-  const boardToDelete = [board.id, createdBoardId].map(Number); // Removes falsy values
-  await apiDeleteListOfBoards(boardToDelete);
+test.afterEach(async ({ apiDeleteAllBoards }) => {
+  await step('Delete boards after test', async () => {
+    await apiDeleteAllBoards();
+  });
 });
-// test.afterEach(async ({request}) => {
-//     expect((await request.delete(`http://localhost:3000/api/boards/${board.id}`)).status()).toBe(200);
-//     expect((await request.delete(`http://localhost:3000/api/boards/${createdBoardId}`)).status()).toBe(200);
-// })
