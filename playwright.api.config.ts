@@ -53,7 +53,12 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'Setup',
+      testMatch: /global\.api\.setup\.ts/,
+    },
+    {
       name: 'API',
+      dependencies: ['Setup'],
     },
   ],
 
