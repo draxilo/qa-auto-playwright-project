@@ -1,0 +1,71 @@
+import { step } from 'allure-js-commons';
+
+import { test } from '@/fixtures/base.fixture';
+import { Board } from '@/interfaces/board.interface';
+import { faker } from '@faker-js/faker';
+import { addAllure, AllureParams } from '@utils/allure.util';
+import { PARENT_SUITE, SUITE } from '@consts/suites.const';
+import { TAGS } from '@consts/tag.const';
+import { Card } from '@interfaces/card.interface';
+
+const allure: AllureParams = {
+  description: 'This test deletes a card via API.',
+  parentSuite: PARENT_SUITE.API,
+  suite: SUITE.CARDS,
+  tags: [TAGS.API, TAGS.CARD, TAGS.DELETE, TAGS.SMOKE],
+};
+
+const board: Board = {
+  name: faker.lorem.words(3),
+  lists: [
+    {
+      name: faker.lorem.words(2),
+      cards: [
+        {
+          name: faker.lorem.words(3),
+        },
+      ],
+    },
+  ],
+};
+
+test.beforeEach(async ({ apiCreateBoard, apiCreateMultipleLists, apiCreateCard }) => {
+  await step('Create Board', async () => {
+    const createBoardResponse = await apiCreateBoard(board);
+    const createBoardResponseBody = await createBoardResponse.json();
+    board.id = createBoardResponseBody.id;
+  });
+  await step('Create List in Board', async () => {
+    const createListResponse = await apiCreateMultipleLists(board);
+    const createListResponseBody = await createListResponse[0].json();
+    board.lists[0].id = createListResponseBody.id;
+  });
+  await step('Create Card in List', async () => {
+    const list = board.lists[0];
+    const card = board.lists[0].cards[0];
+    const createCardResponse = await apiCreateCard(board, list, card);
+    const createCardResponseBody = await createCardResponse.json();
+    card.id = createCardResponseBody.id;
+  });
+});
+
+test('Delete Card via API', async ({ apiGetCard, apiDeleteCard }) => {
+  await addAllure(allure);
+
+  const card: Card = board.lists[0].cards[0];
+
+  await step('Delete Card', async () => {
+    await apiDeleteCard(card);
+  });
+
+  await step('Verify card is deleted', async () => {
+    await apiGetCard(card, 404);
+  });
+});
+
+// Tear down
+test.afterEach(async ({ apiDeleteBoard }) => {
+  await step('Clear Board after test via API', async () => {
+    await apiDeleteBoard(board);
+  });
+});

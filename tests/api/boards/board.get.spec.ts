@@ -1,3 +1,5 @@
+import { step } from 'allure-js-commons';
+
 import { APIResponse, expect } from '@playwright/test';
 import { test } from '@/fixtures/base.fixture';
 import { z } from 'zod';
@@ -12,7 +14,7 @@ const allure: AllureParams = {
   description: 'This test retrieves the list of boards via API.',
   parentSuite: PARENT_SUITE.API,
   suite: SUITE.BOARDS,
-  tags: [TAGS.API, TAGS.BOARD, TAGS.LIST, TAGS.SMOKE],
+  tags: [TAGS.API, TAGS.BOARD, TAGS.GET, TAGS.SMOKE],
 };
 
 const board: Board = {
@@ -20,38 +22,32 @@ const board: Board = {
 };
 
 test.beforeEach(async ({ apiCreateBoard }) => {
-  await test.step('Prepare Board before test via API', async () => {
-    const createResponse = await apiCreateBoard(board);
-    expect(createResponse.status()).toBe(201);
-
-    const responseBody = await createResponse.json();
-    board.id = responseBody.id;
+  await step('Prepare Board before test via API', async () => {
+    const response = await apiCreateBoard(board);
+    const responseJson = await response.json();
+    board.id = responseJson.id;
   });
 });
 
-test('Get Boards API', async ({ request }) => {
+test('Get Boards API', async ({ apiGetAllBoards }) => {
   await addAllure(allure);
 
   let getResponse: APIResponse;
 
-  await test.step('Get list of boards via API', async () => {
-    getResponse = await request.get('/api/boards');
+  await step('Get all boards via API', async () => {
+    getResponse = await apiGetAllBoards();
   });
 
-  await test.step('Check status code of the response', async () => {
-    expect(getResponse.status()).toBe(200);
-  });
-
-  await test.step('Validate response schema', async () => {
+  await step('Validate response schema', async () => {
     const arrayBoardsSchema = z.array(boardsSchema);
-    const responseBody = await getResponse.json();
-    expect(() => arrayBoardsSchema.parse(responseBody)).not.toThrow();
+    const responseJson = await getResponse.json();
+    expect(() => arrayBoardsSchema.parse(responseJson)).not.toThrow();
   });
 });
 
 // Tear down
 test.afterEach(async ({ apiDeleteBoard }) => {
-  await test.step('Clear Board after test via API', async () => {
+  await step('Clear Board after test via API', async () => {
     await apiDeleteBoard(board);
   });
 });
