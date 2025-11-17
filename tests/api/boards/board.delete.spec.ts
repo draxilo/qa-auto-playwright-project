@@ -26,7 +26,7 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   });
 });
 
-test('Delete Board API', async ({ apiDeleteBoard, apiGetBoard }) => {
+test('Delete Board API', { tag: [...allure.tags] }, async ({ apiDeleteBoard, apiGetBoard }) => {
   await addAllure(allure);
 
   await step('Delete Board via API', async () => {

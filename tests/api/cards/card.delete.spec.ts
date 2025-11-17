@@ -49,7 +49,7 @@ test.beforeEach(async ({ apiCreateBoard, apiCreateMultipleLists, apiCreateCard }
   });
 });
 
-test('Delete Card via API', async ({ apiGetCard, apiDeleteCard }) => {
+test('Delete Card via API', { tag: [...allure.tags] }, async ({ apiGetCard, apiDeleteCard }) => {
   await addAllure(allure);
 
   const card: Card = board.lists[0].cards[0];

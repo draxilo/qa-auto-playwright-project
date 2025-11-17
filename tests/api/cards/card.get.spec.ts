@@ -51,7 +51,7 @@ test.beforeEach(async ({ apiCreateBoard, apiCreateMultipleLists, apiCreateCard }
   });
 });
 
-test('Get list of cards via API', async ({ apiGetCard }) => {
+test('Get list of cards via API', { tag: [...allure.tags] }, async ({ apiGetCard }) => {
   await addAllure(allure);
 
   let getResponse: APIResponse;

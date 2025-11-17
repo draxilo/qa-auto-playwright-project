@@ -18,7 +18,7 @@ const board: Board = {
   name: faker.lorem.words(3),
 };
 
-test('Create Board API', async ({ apiCreateBoard }) => {
+test('Create Board API', { tag: [...allure.tags] }, async ({ apiCreateBoard }) => {
   await addAllure(allure);
 
   await step('Create board via API', async () => {

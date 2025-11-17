@@ -29,7 +29,7 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   });
 });
 
-test('Get Boards API', async ({ apiGetAllBoards }) => {
+test('Get Boards API', { tag: [...allure.tags] }, async ({ apiGetAllBoards }) => {
   await addAllure(allure);
 
   let getResponse: APIResponse;

@@ -27,7 +27,7 @@ test.beforeEach(async ({ apiCreateBoard }) => {
   });
 });
 
-test('Rename Board API', async ({ apiGetBoard, apiUpdateBoard }) => {
+test('Rename Board API', { tag: [...allure.tags] }, async ({ apiGetBoard, apiUpdateBoard }) => {
   await addAllure(allure);
 
   const newBoardName = faker.lorem.words(3);
