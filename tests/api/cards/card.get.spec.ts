@@ -4,7 +4,6 @@ import { Board } from '@/interfaces/board.interface';
 import { faker } from '@faker-js/faker';
 import { test } from '@/fixtures/base.fixture';
 import { APIResponse, expect } from '@playwright/test';
-import { z } from 'zod';
 import { cardsSchema } from '@/schemas/cards.schema';
 import { addAllure, AllureParams } from '@utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@consts/suites.const';

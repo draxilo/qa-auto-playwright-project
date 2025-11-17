@@ -5,7 +5,6 @@ import { addAllure, AllureParams } from '@utils/allure.util';
 import { PARENT_SUITE, SUITE } from '@consts/suites.const';
 import { TAGS } from '@consts/tag.const';
 import { step } from 'allure-js-commons';
-import { APIResponse, expect } from '@playwright/test';
 import { List } from '@interfaces/list.interface';
 
 const allure: AllureParams = {
@@ -48,14 +47,13 @@ test.beforeEach(async ({ apiCreateMultipleLists, apiCreateBoard }) => {
 test('Delete List via API', async ({ apiDeleteList, apiGetList }) => {
   await addAllure(allure);
 
-  let response: APIResponse;
   let deletedListId!: string;
 
   await step('Delete created List(s)', async () => {
     for (let i = 0; i < board.lists!.length; i++) {
       const list = board.lists![i]!;
       deletedListId = list.id!;
-      response = await apiDeleteList(list);
+      await apiDeleteList(list);
     }
   });
   await step('Verify list is deleted', async () => {
