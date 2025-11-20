@@ -1,0 +1,7 @@
+stages:
+  - test
+
+web:
+    stage: test
+    script:
+      - echo "Hajdiho"
