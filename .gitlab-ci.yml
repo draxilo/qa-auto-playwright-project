@@ -7,13 +7,22 @@ web:
     stage: test
     script:
       - echo "Running web tests..."
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      - when: never
 
 generate_report:
     stage: report
     script:
       - echo "Generating report..."
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      - when: never
 
 slack:
     stage: notification
     script:
       - echo "Sending notification to Slack..."
+    rules:
+      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      - when: never
