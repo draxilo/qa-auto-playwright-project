@@ -1,7 +1,19 @@
 stages:
   - test
+  - report
+  - notification
 
 web:
     stage: test
     script:
-      - echo "Hajdiho"
+      - echo "Running web tests..."
+
+generate_report:
+    stage: report
+    script:
+      - echo "Generating report..."
+
+slack:
+    stage: notification
+    script:
+      - echo "Sending notification to Slack..."
