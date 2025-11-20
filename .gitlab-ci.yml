@@ -9,7 +9,7 @@ web:
       - echo "Running web tests..."
     rules:
       - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      - when: never
+      - if: $CI_PIPELINE_SOURCE == "schedule"
 
 generate_report:
     stage: report
@@ -17,7 +17,7 @@ generate_report:
       - echo "Generating report..."
     rules:
       - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      - when: never
+      - if: $CI_PIPELINE_SOURCE == "schedule"
 
 slack:
     stage: notification
@@ -25,4 +25,4 @@ slack:
       - echo "Sending notification to Slack..."
     rules:
       - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      - when: never
+      - if: $CI_PIPELINE_SOURCE == "schedule"
