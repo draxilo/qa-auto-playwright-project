@@ -4,12 +4,15 @@ stages:
   - notification
 
 web:
-    stage: test
-    script:
-      - echo "Running web tests..."
-    rules:
-      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      - if: $CI_PIPELINE_SOURCE == "schedule"
+  stage: test
+  before_script:
+    - npm ci
+    - npx playwright install --with-deps
+  script:
+    - npx playwright test --config=playwright.web.config.ts
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
 
 generate_report:
     stage: report
