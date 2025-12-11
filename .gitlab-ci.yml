@@ -1,31 +1,14 @@
+include:
+  - 'ci/config.yml'
+  - 'ci/setup.yml'
+  - 'ci/test.yml'
+  - 'ci/report.yml'
+  - 'ci/deploy.yml'
+  - 'ci/notification.yml'
+
 stages:
+  - setup
   - test
   - report
+  - deploy
   - notification
-
-web:
-  stage: test
-  before_script:
-    - npm ci
-    - npx playwright install --with-deps
-  script:
-    - npx playwright test --config=playwright.web.config.ts
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    - if: $CI_PIPELINE_SOURCE == "schedule"
-
-generate_report:
-    stage: report
-    script:
-      - echo "Generating report..."
-    rules:
-      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      - if: $CI_PIPELINE_SOURCE == "schedule"
-
-slack:
-    stage: notification
-    script:
-      - echo "Sending notification to Slack..."
-    rules:
-      - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-      - if: $CI_PIPELINE_SOURCE == "schedule"

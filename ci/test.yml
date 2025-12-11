@@ -1,0 +1,35 @@
+web:
+  extends: .base_config
+  stage: test
+  image: $PLAYWRIGHT_IMAGE
+  dependencies:
+    - setup_app
+  before_script:
+    - npm ci
+    - npx playwright install --with-deps
+  script:
+    - echo "Running WEB tests..."
+    - npm run test:web
+  allow_failure: true
+  artifacts:
+    paths:
+      - reports/allure-results
+      - reports/web-results.json
+
+api:
+  extends: .base_config
+  stage: test
+  image: $PLAYWRIGHT_IMAGE
+  dependencies:
+    - setup_app
+  before_script:
+    - npm ci
+    - npx playwright install --with-deps
+  script:
+    - echo "Running API tests..."
+    - npm run test:api
+  allow_failure: true
+  artifacts:
+    paths:
+      - reports/allure-results
+      - reports/api-results.json

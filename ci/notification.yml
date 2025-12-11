@@ -1,0 +1,12 @@
+slack:
+  extends: .base_config
+  stage: notification
+  image: $NODE_IMAGE
+  script:
+    - echo "Sending notification to Slack..."
+    - npm ci
+    - node send-slack-report.js
+  dependencies:
+    - api
+    - web
+    - generate_report

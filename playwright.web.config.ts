@@ -36,6 +36,7 @@ export default defineConfig({
         resultsDir: 'reports/allure-results',
       },
     ],
+    ['json', { outputFile: 'reports/web-results.json' }],
   ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
@@ -99,8 +100,9 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'npm start --prefix ../trelloapp-vue-vite-ts',
+    command: 'npm start --prefix app',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
+    stderr: 'ignore',
   },
 });
