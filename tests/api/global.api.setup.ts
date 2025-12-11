@@ -9,7 +9,7 @@ const allure: AllureParams = {
   suite: SUITE.SETUP,
 };
 
-setup('Setup', { tag: [...allure.tags] }, async ({ apiDeleteAllBoards }) => {
+setup('Setup', async ({ apiDeleteAllBoards }) => {
   await addAllure(allure);
 
   await step('Clear out all data', async () => {

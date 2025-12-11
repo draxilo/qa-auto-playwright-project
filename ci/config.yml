@@ -1,0 +1,12 @@
+variables:
+  PLAYWRIGHT_IMAGE: mcr.microsoft.com/playwright:v1.57.0-noble
+  PATH_PREFIX: 'allure-report-$CI_PIPELINE_ID'
+  NODE_IMAGE: node:24
+  ALLURE_IMAGE: tobix/allure-cli
+
+.base_config:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  artifacts:
+    expire_in: 1 day

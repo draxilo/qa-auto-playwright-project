@@ -1,0 +1,10 @@
+setup_app:
+  extends: .base_config
+  stage: setup
+  image: $NODE_IMAGE
+  script:
+    - git clone https://github.com/filiphric/trelloapp-vue-vite-ts.git app
+    - npm ci --prefix app
+  artifacts:
+    paths:
+      - app/

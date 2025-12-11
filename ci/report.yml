@@ -1,0 +1,12 @@
+generate_report:
+  extends: .base_config
+  stage: report
+  image: $ALLURE_IMAGE
+  script:
+    - allure generate reports/allure-results --clean -o reports/allure-report
+  dependencies:
+    - web
+    - api
+  artifacts:
+    paths:
+      - reports/allure-report
