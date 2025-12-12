@@ -74,15 +74,15 @@ function suiteLine(stats) {
 
 const payload = {
   blocks: [
-    {
-      type: 'section',
-      text: {
-        type: 'mrkdwn',
-        text: allPassed
-          ? ':white_check_mark: *All test suites passed!*'
-          : ':x: *Some test suites failed!*',
-      },
-    },
+    // {
+    //   type: 'section',
+    //   text: {
+    //     type: 'mrkdwn',
+    //     text: allPassed
+    //       ? ':white_check_mark: *All test suites passed!*'
+    //       : ':x: *Some test suites failed!*',
+    //   },
+    // },
     {
       type: 'section',
       text: {
