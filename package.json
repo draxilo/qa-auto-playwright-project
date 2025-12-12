@@ -33,7 +33,6 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-playwright": "^2.2.2",
     "husky": "^9.1.7",
-    "playwright-slack-report": "^1.1.100",
     "prettier": "^3.6.2",
     "rimraf": "^6.0.1",
     "typescript": "^5.8.3",
