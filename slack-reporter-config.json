@@ -2,7 +2,7 @@
   "sendResults": "always",
   "slackLogLevel": "error",
   "sendUsingWebhook": {
-    "webhookUrl": "REDACTED"
+    "webhookUrl": "${SLACK_WEBHOOK_URL}"
   },
   "meta": [
     { "key": "build", "value": "1.0.0" },

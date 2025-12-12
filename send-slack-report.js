@@ -1,7 +1,6 @@
 import fs from 'fs';
 
-const SLACK_WEBHOOK_URL =
-  'REDACTED';
+const SLACK_WEBHOOK_URL = process.env.SLACK_WEBHOOK_URL;
 const CI_PAGES_URL = process.env.CI_PAGES_URL;
 const CI_PIPELINE_ID = process.env.CI_PIPELINE_ID;
 
